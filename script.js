@@ -31,13 +31,17 @@ window.addEventListener("load", function () {
       } else {
          let fuelStatus = 'high enough';
          let cargoStatus = 'low enough';
+         let launchStatus = document.getElementById("launchStatus");
+         launchStatus.style.color = 'green';
 
          if(fuelLevel.value < 10000) {
             fuelStatus = 'too low';
+            launchStatus.style.color = 'red';
          }
 
          if(cargoWeight.value > 10000) {
             cargoStatus = 'too heavy';
+            launchStatus.style.color = 'red';
          }
 
          faultyItems.innerHTML = `
