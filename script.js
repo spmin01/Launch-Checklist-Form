@@ -14,12 +14,34 @@
 
 window.addEventListener("load", function() {
     const formSubmit = document.getElementById("formSubmit");
+
+    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response) {
+        response.json().then(function(json) {
+            let missionTarget = document.getElementById("missionTarget");
+            let targetIndex = Math.floor(Math.random() * json.length);
+            // console.log(targetIndex);
+
+            missionTarget.innerHTML = `
+                <h2>Mission Destination</h2>
+                <ol>
+                    <li>Name: ${json[targetIndex].name}</li>
+                    <li>Diameter: ${json[targetIndex].diameter}</li>
+                    <li>Star: ${json[targetIndex].star}</li>
+                    <li>Distance from Earth: ${json[targetIndex].distance}</li>
+                    <li>Number of Moons: ${json[targetIndex].moons}</li>
+                </ol>
+                <img src="${json[targetIndex].image}"</li>
+            `;
+        });
+    });
+
     formSubmit.addEventListener("click", function(event) {
         // grab data from the form
         let pilotName = document.querySelector("input[name=pilotName");
         let copilotName = document.querySelector("input[name=copilotName");
         let fuelLevel = document.querySelector("input[name=fuelLevel");
         let cargoWeight = document.querySelector("input[name=cargoWeight");
+
         let faultyItems = document.getElementById("faultyItems");
         let launchStatus = document.getElementById("launchStatus");
 
