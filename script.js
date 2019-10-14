@@ -48,43 +48,48 @@ window.addEventListener("load", function() {
         if (pilotName.value === '' || copilotName.value === '' || fuelLevel.value === '' || cargoWeight.value === '') {
             alert("All fields required!");
             event.preventDefault();
+
         } else if (!isNaN(Number(pilotName.value)) || !isNaN(Number(copilotName.value))) {
             alert("Pilot and Copilot name must be strings!")
             event.preventDefault();
+
         } else if (isNaN(Number(fuelLevel.value)) || isNaN(Number(cargoWeight.value))) {
             alert("Fuel level and Cargo weight must be numbers!");
             event.preventDefault();
+
         } else {
-            let fuelStatus = 'high enough';
-            let cargoStatus = 'low enough';
+            let pilotStatus = document.getElementById("pilotStatus");
+            let copilotStatus = document.getElementById("copilotStatus");
+            let fuelStatus = document.getElementById("fuelStatus");
+            let cargoStatus = document.getElementById("cargoStatus");
             let launchReady = true;
 
+            pilotStatus.innerHTML = `Pilot ${pilotName.value} Ready!`;
+            copilotStatus.innerHTML = `Pilot ${copilotName.value} Ready!`
+
             if (fuelLevel.value < 10000) {
-                fuelStatus = 'too low';
+                fuelStatus.innerHTML = "Fuel level too low for launch!";
                 launchReady = false;
+            } else {
+                fuelStatus.innerHTML = "Fuel level high enough for launch.";
             }
 
             if (cargoWeight.value > 10000) {
-                cargoStatus = 'too heavy';
+                cargoStatus.innerHTML = "Cargo weight too heavy for launch!";
                 launchReady = false;
+            } else {
+                cargoStatus.innerHTML = "Cargo weight low enough for launch.";
             }
 
             if (!launchReady) {
                 launchStatus.innerHTML = "Shuttle is not ready for launch."
                 launchStatus.style.color = "red";
+
             } else {
                 launchStatus.innerHTML = "Shuttle is ready for launch!";
                 launchStatus.style.color = "green";
             }
 
-            faultyItems.innerHTML = `
-            <ol>
-               <li id="pilotStatus">Pilot ${pilotName.value} Ready</li>
-               <li id="copilotStatus">Co-pilot ${copilotName.value} Ready</li>
-               <li id="fuelStatus">Fuel ${fuelStatus} for launch</li>
-               <li id="cargoStatus">Cargo weight ${cargoStatus} for launch</li>
-            </ol>
-            `;
             faultyItems.style.visibility = "visible";
             event.preventDefault();
         }
