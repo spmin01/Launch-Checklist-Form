@@ -19,7 +19,6 @@ window.addEventListener("load", function() {
         response.json().then(function(json) {
             let missionTarget = document.getElementById("missionTarget");
             let targetIndex = Math.floor(Math.random() * json.length);
-            // console.log(targetIndex);
 
             missionTarget.innerHTML = `
                 <h2>Mission Destination</h2>
@@ -42,9 +41,6 @@ window.addEventListener("load", function() {
         let fuelLevel = document.querySelector("input[name=fuelLevel");
         let cargoWeight = document.querySelector("input[name=cargoWeight");
 
-        let faultyItems = document.getElementById("faultyItems");
-        let launchStatus = document.getElementById("launchStatus");
-
         if (pilotName.value === '' || copilotName.value === '' || fuelLevel.value === '' || cargoWeight.value === '') {
             alert("All fields required!");
             event.preventDefault();
@@ -58,14 +54,18 @@ window.addEventListener("load", function() {
             event.preventDefault();
 
         } else {
+            let faultyItems = document.getElementById("faultyItems");
+            let launchStatus = document.getElementById("launchStatus");
+
             let pilotStatus = document.getElementById("pilotStatus");
             let copilotStatus = document.getElementById("copilotStatus");
             let fuelStatus = document.getElementById("fuelStatus");
             let cargoStatus = document.getElementById("cargoStatus");
+
             let launchReady = true;
 
             pilotStatus.innerHTML = `Pilot ${pilotName.value} Ready!`;
-            copilotStatus.innerHTML = `Pilot ${copilotName.value} Ready!`
+            copilotStatus.innerHTML = `Pilot ${copilotName.value} Ready!`;
 
             if (fuelLevel.value < 10000) {
                 fuelStatus.innerHTML = "Fuel level too low for launch!";
@@ -84,7 +84,6 @@ window.addEventListener("load", function() {
             if (!launchReady) {
                 launchStatus.innerHTML = "Shuttle is not ready for launch."
                 launchStatus.style.color = "red";
-
             } else {
                 launchStatus.innerHTML = "Shuttle is ready for launch!";
                 launchStatus.style.color = "green";
